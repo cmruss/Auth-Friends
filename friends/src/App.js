@@ -9,8 +9,9 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <nav>
+        <nav className='navbar'>
           <NavLink to='/login'>login</NavLink>
+          <span>|</span>
           <NavLink to='/friendslist'>friends list</NavLink>
         </nav>
         <Switch>

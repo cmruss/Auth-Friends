@@ -40,16 +40,20 @@ class Login extends React.Component {
                     <input
                         type='text'
                         name='username'
+                        id='username'
+                        placeholder='username'
                         value={this.state.credentials.username}
                         onChange={this.handleChange}
                     />
                     <input
                         type='password'
                         name='password'
+                        placeholder='password'
+                        id='password'
                         value={this.state.credentials.password}
                         onChange={this.handleChange}
                     />
-                    <button>log in</button>
+                    <button className='login-button'>log in</button>
                 </form>
             </div>
         );

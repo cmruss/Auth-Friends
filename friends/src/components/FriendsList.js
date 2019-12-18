@@ -1,11 +1,13 @@
 import React from 'react';
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import FriendForm from './FriendForm';
-
+import img from './friends.png';
+import Friend from './Friend';
 
 class FriendsList extends React.Component {
     state = {
-        friends: []
+        friends: [],
+        isFetching: false
     };
 
     componentDidMount() {
@@ -27,16 +29,25 @@ class FriendsList extends React.Component {
             .catch(error => console.log('No dice.', error));
     };
 
+    removeFriends = (id) => {
+        axiosWithAuth()
+            .delete(`/friends/${id}`)
+            .then(response =>
+                console.log(response))
+            .catch(error => console.log('No dice.', error))
+        this.getFriends();
+    };
+
     render() {
         return(
-            <div>
-                <img src='../friends.png' alt='F-R-I-E-N-D-S'/>
-                    <FriendForm getFriends={this.getFriends} />
-                    {this.state.friends.map(friend => <div friend={friend} key={friend.id}>
-                        <h2>{friend.name}</h2>
-                        <h3>age: {friend.age}</h3>
-                        <h3>{friend.email}</h3>
-                    </div>)}
+            <div className='friend-wrapper'>
+                <img src={img} alt='F-R-I-E-N-D-S'/>
+                <FriendForm getFriends={this.getFriends} />
+                <div className='friends-list'>
+                    {this.state.friends.map(friend => 
+                        <Friend friend={friend} key={friend.id} removeFriends={this.removeFriends}/>
+                   )}
+                </div>
             </div>
         );
     };
